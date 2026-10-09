@@ -1,0 +1,22 @@
+{
+  "name": "（示例）小董",
+  "home_city": "北京",
+  "hotel_address": "（出差时酒店地址，用于外送）",
+  "daily_budget": {
+    "breakfast": 20,
+    "lunch": 60,
+    "afternoon": 40,
+    "dinner": 80,
+    "night": 30
+  },
+  "business_entertain_budget": 120,
+  "hard_avoid": ["香菜", "花生"],
+  "taste": {
+    "ice": "正常冰",
+    "sugar": "少糖",
+    "prefer": []
+  },
+  "kcal_target": 2000,
+  "dynamic_enabled": true,
+  "temp_override": null
+}

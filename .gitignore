@@ -29,3 +29,13 @@ dist/
 build/
 *.log
 npm-debug.log*
+
+# 测试 / 缓存
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# 个人差旅档案（含个人地址与偏好，绝不入库）
+profile.json
+.mcd_biztravel/
