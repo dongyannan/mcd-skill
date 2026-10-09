@@ -63,7 +63,7 @@ mcd-biztravel report --date today --csv ~/Desktop/报销.csv
 ## 硬约束（必须遵守）
 
 1. **默认只读。** 7 个写操作工具（`create-order`、`cancel-order`、`auto-bind-coupons`、`draw-lottery`、`mall-create-order`、`party-order-create`、`delivery-create-address`）**未加 `--yes` 一律不执行**，只打印"将要发生什么"。
-2. **绝不承诺"回信 / 反查"类能力**，也不做任何超出麦当劳官方数据范围的推断。
+2. **绝不编造菜单 / 价格 / 优惠。** 所有商品、价格与优惠信息必须来自 MCP 实时返回，不做任何超出麦当劳官方数据范围的推断。
 3. **硬禁忌永不可覆盖。** 过敏原、宗教约束、明确不吃的食材，动态层不得推翻。
 4. **不做医疗 / 营养建议。** 营养数据仅作参考展示。
 5. **Token 只从环境变量读**，不写文件、不入库、不输出。
