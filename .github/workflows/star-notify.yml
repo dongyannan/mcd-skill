@@ -1,0 +1,54 @@
+name: Star 通知
+
+# 触发条件：有人给本仓库点 Star（watch / started）
+# 另外支持手动运行，用于自检整条通知链路是否通畅
+on:
+  watch:
+    types: [started]
+  workflow_dispatch:
+
+# 需要 issues 写权限才能创建通知 Issue
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 创建 Star 通知 Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const manual = context.eventName === 'workflow_dispatch';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // 当前 Star 总数
+            const { data } = await github.rest.repos.get({ owner, repo });
+            const stars = data.stargazers_count;
+
+            // 触发者
+            const sender = manual
+              ? (context.actor || 'unknown')
+              : (context.payload.sender && context.payload.sender.login) || 'someone';
+
+            const title = manual
+              ? `[自检] Star 通知链路正常（当前 ${stars} 星）`
+              : `收到新 Star：@${sender}（当前 ${stars} 星）`;
+
+            const body = [
+              manual
+                ? '这是一次**手动自检**，用于验证 Star 通知链路是否通畅。收到这封 Issue 通知，说明配置成功了。'
+                : `**@${sender}** 刚刚给本仓库点了一颗星。`,
+              '',
+              `- 当前 Star 数：**${stars}**`,
+              `- 时间：${new Date().toISOString().replace('T', ' ').slice(0, 19)} UTC`,
+              '',
+              `@${owner}`,
+              '',
+              '> 本通知由 `.github/workflows/star-notify.yml` 自动生成，可直接关闭。',
+            ].join('\n');
+
+            const issue = await github.rest.issues.create({ owner, repo, title, body });
+            core.info(`已创建通知 Issue #${issue.data.number}`);
