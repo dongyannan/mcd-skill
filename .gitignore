@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# 依赖
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+vendor/
+
+# 敏感信息 —— 切勿提交真实 Token / 密钥 / 凭证
+.env
+.env.*
+!.env.example
+*.local.json
+mcp-config.json
+secrets/
+*.pem
+*.key
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+
+# 构建产物与日志
+dist/
+build/
+*.log
+npm-debug.log*
